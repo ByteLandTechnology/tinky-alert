@@ -1,0 +1,11 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "plugin": ["typedoc-plugin-markdown"],
+  "disableSources": true,
+  "out": "docs/api",
+  "externalSymbolLinkMappings": {
+    "tinky-theme": {
+      "ComponentTheme": "#"
+    }
+  }
+}

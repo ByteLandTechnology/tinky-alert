@@ -1,3 +1,7 @@
+**tinky-alert**
+
+---
+
 # tinky-alert
 
 > A React-like alert component library for building beautiful terminal UIs.
@@ -123,7 +127,7 @@ const customTheme = extendTheme(defaultTheme, {
 
 ## API Documentation
 
-For complete API documentation, type definitions, and usage examples, visit the [API Docs](./docs/api).
+For complete API documentation, type definitions, and usage examples, visit the [API Docs](_media/api).
 
 ### Component
 
