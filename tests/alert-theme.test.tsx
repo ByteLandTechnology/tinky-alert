@@ -5,7 +5,7 @@
  * style functions, variant-specific settings, and color mappings.
  */
 
-import { describe, it, expect } from "bun:test";
+import { describe, it, expect } from "vitest";
 import { alertTheme } from "../src/index.js";
 
 describe("alertTheme", () => {

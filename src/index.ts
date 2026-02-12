@@ -43,4 +43,3 @@ export {
   type AlertTheme,
   type AlertThemeProps,
 } from "./themes/alert-theme.js";
-export { isUnicodeSupported } from "./utils/unicode.js";

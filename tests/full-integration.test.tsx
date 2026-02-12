@@ -5,7 +5,7 @@
  * rendering, theme integration, and component composition scenarios.
  */
 
-import { describe, it, expect } from "bun:test";
+import { describe, it, expect } from "vitest";
 import { render } from "tinky-test";
 import ansi from "ansis";
 import {

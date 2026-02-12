@@ -5,7 +5,7 @@
  * their visual characteristics, and semantic meanings.
  */
 
-import { describe, it, expect } from "bun:test";
+import { describe, it, expect } from "vitest";
 import { Box } from "tinky";
 import { ThemeProvider, extendTheme, defaultTheme } from "tinky-theme";
 import { Alert } from "../src/index.js";

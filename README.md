@@ -305,7 +305,7 @@ Icons are resolved in the `Alert` component through `tinky-figures` (`info`, `ti
 bun install
 
 # Run tests
-bun test
+bun run test
 
 # Build the project
 bun run build

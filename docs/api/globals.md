@@ -20,4 +20,3 @@
 ## Functions
 
 - [Alert](functions/Alert.md)
-- [isUnicodeSupported](functions/isUnicodeSupported.md)

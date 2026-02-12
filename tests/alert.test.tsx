@@ -5,7 +5,7 @@
  * and verifying variant-specific visual characteristics.
  */
 
-import { test, expect, describe } from "bun:test";
+import { test, expect, describe } from "vitest";
 import { Box } from "tinky";
 import { render } from "tinky-test";
 import ansi from "ansis";

@@ -5,7 +5,7 @@
  * public APIs are properly exported and accessible.
  */
 
-import { describe, it, expect } from "bun:test";
+import { describe, it, expect } from "vitest";
 import {
   Alert,
   type AlertProps,
