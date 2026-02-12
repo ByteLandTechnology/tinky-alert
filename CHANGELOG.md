@@ -1,3 +1,17 @@
+## [1.1.0](https://github.com/ByteLandTechnology/tinky-alert/compare/v1.0.0...v1.1.0) (2026-02-12)
+
+### ✨ Features
+
+- use tinky-figures for alert icons ([cb35f13](https://github.com/ByteLandTechnology/tinky-alert/commit/cb35f13cb5e428ae590084033d6a9b2633b45b4f))
+
+### ✅ Tests
+
+- migrate test suite from bun:test to vitest ([a495877](https://github.com/ByteLandTechnology/tinky-alert/commit/a495877821a3baaeb38a8307a7be6c11532b1a64))
+
+### 📦 Build
+
+- simplify typedoc build and docs scripts ([ee9eb48](https://github.com/ByteLandTechnology/tinky-alert/commit/ee9eb4803e9c072011c8ef37b3c7271eff8a5300))
+
 ## 1.0.0 (2026-02-06)
 
 ### ✨ Features
