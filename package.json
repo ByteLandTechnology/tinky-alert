@@ -29,11 +29,10 @@
   "main": "./lib/index.js",
   "scripts": {
     "test": "bun test",
-    "build": "tsc && npm run docs",
+    "build": "tsc && typedoc",
     "lint": "eslint src tests",
-    "prepublish": "npm run build",
     "prepare": "husky",
-    "docs": "typedoc && prettier --write docs/api"
+    "docs": "typedoc"
   },
   "files": [
     "./bin/*",

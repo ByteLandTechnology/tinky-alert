@@ -3,6 +3,7 @@
   "plugin": ["typedoc-plugin-markdown"],
   "disableSources": true,
   "out": "docs/api",
+  "formatWithPrettier": true,
   "externalSymbolLinkMappings": {
     "tinky-theme": {
       "ComponentTheme": "#"
