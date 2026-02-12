@@ -39,7 +39,7 @@ Component structure:
 Rendering behavior:
 
 1. Reads theme configuration for the Alert component
-2. Resolves variant-specific styles and icon from theme
+2. Resolves variant-specific styles and icon mappings
 3. Renders a bordered container with variant-specific color
 4. Displays icon on the left side (non-shrinking)
 5. Displays content on the right side (flexible)
@@ -49,7 +49,7 @@ Theme integration:
 
 - Uses `useComponentTheme` hook to resolve styles
 - Styles come from `alertTheme.styles.*` functions
-- Icon comes from `alertTheme.config()` based on variant
+- Icon comes from `useFigures()` from `tinky-figures`
 - Styles are applied to Box and Text components from tinky
 
 Flex layout behavior:

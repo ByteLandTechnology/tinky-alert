@@ -14,10 +14,10 @@
  * - Flexible content support via ReactNode
  *
  * Variant characteristics:
- * - info: Blue color with ℹ️ icon (fallback: ℹ) for general information
- * - success: Green color with ✅ icon (fallback: √) for successful operations
- * - error: Red color with ❌ icon (fallback: ×) for error notifications
- * - warning: Yellow color with ⚠️ icon (fallback: ‼) for cautionary messages
+ * - info: Blue color with ℹ icon (fallback: i) for general information
+ * - success: Green color with ✔ icon (fallback: √) for successful operations
+ * - error: Red color with ✘ icon (fallback: ×) for error notifications
+ * - warning: Yellow color with ⚠ icon (fallback: ‼) for cautionary messages
  *
  * The component uses the tinky-theme system to resolve styling and
  * configuration, allowing for easy customization through theme extension.
@@ -67,9 +67,9 @@
  */
 
 import { JSX, type ReactNode } from "react";
-import { Box, Text, useApp } from "tinky";
+import { Box, Text } from "tinky";
+import { useFigures } from "tinky-figures";
 import { useComponentTheme } from "tinky-theme";
-import { isUnicodeSupported } from "../utils/unicode.js";
 import alertTheme, { type AlertThemeProps } from "../themes/alert-theme.js";
 
 /**
@@ -86,10 +86,10 @@ import alertTheme, { type AlertThemeProps } from "../themes/alert-theme.js";
  *   determines the visual appearance including border color, icon, and semantic meaning.
  *
  *   Variant options and their meanings:
- *   - `info`: General information or neutral messages (blue border, ℹ️ icon / ℹ fallback)
- *   - `success`: Successful operations or confirmations (green border, ✅ icon / √ fallback)
- *   - `error`: Error messages or failure notifications (red border, ❌ icon / × fallback)
- *   - `warning`: Warning messages or cautionary notes (yellow border, ⚠️ icon / ‼ fallback)
+ *   - `info`: General information or neutral messages (blue border, ℹ icon / i fallback)
+ *   - `success`: Successful operations or confirmations (green border, ✔ icon / √ fallback)
+ *   - `error`: Error messages or failure notifications (red border, ✘ icon / × fallback)
+ *   - `warning`: Warning messages or cautionary notes (yellow border, ⚠ icon / ‼ fallback)
  *
  *   Each variant has associated:
  *   - Border color around the alert container
@@ -168,7 +168,7 @@ export interface AlertProps {
  *
  * Rendering behavior:
  * 1. Reads theme configuration for the Alert component
- * 2. Resolves variant-specific styles and icon from theme
+ * 2. Resolves variant-specific styles and icon mappings
  * 3. Renders a bordered container with variant-specific color
  * 4. Displays icon on the left side (non-shrinking)
  * 5. Displays content on the right side (flexible)
@@ -177,7 +177,7 @@ export interface AlertProps {
  * Theme integration:
  * - Uses `useComponentTheme` hook to resolve styles
  * - Styles come from `alertTheme.styles.*` functions
- * - Icon comes from `alertTheme.config()` based on variant
+ * - Icon comes from `useFigures()` from `tinky-figures`
  * - Styles are applied to Box and Text components from tinky
  *
  * Flex layout behavior:
@@ -224,19 +224,14 @@ export interface AlertProps {
 export function Alert({ children, variant, title }: AlertProps): JSX.Element {
   const props: AlertThemeProps = { variant };
   useComponentTheme<AlertThemeProps>("Alert", alertTheme, props);
-  const { env } = useApp();
-
-  const supportsUnicode = isUnicodeSupported(env ?? {});
-  const iconMap: Record<string, { unicode: string; fallback: string }> = {
-    info: { unicode: "ℹ️", fallback: "ℹ" },
-    success: { unicode: "✅", fallback: "√" },
-    error: { unicode: "❌", fallback: "×" },
-    warning: { unicode: "⚠️", fallback: "‼" },
+  const figures = useFigures();
+  const iconMap: Record<AlertProps["variant"], string> = {
+    info: figures.info,
+    success: figures.tick,
+    error: figures.cross,
+    warning: figures.warning,
   };
-
-  const icon = supportsUnicode
-    ? iconMap[variant].unicode
-    : iconMap[variant].fallback;
+  const icon = iconMap[variant];
 
   return (
     <Box {...alertTheme.styles.container(props)}>

@@ -9,7 +9,23 @@ import { test, expect, describe } from "bun:test";
 import { Box } from "tinky";
 import { render } from "tinky-test";
 import ansi from "ansis";
+import {
+  asciiFigures,
+  isUnicodeSupported,
+  unicodeFigures,
+} from "tinky-figures";
 import { Alert } from "../src/index.js";
+
+const figures = isUnicodeSupported(process.platform, process.env)
+  ? unicodeFigures
+  : asciiFigures;
+
+const iconByVariant = {
+  info: figures.info,
+  success: figures.tick,
+  error: figures.cross,
+  warning: figures.warning,
+} as const;
 
 describe("Alert", () => {
   test("success", () => {
@@ -22,7 +38,7 @@ describe("Alert", () => {
     );
 
     const output = lastFrame();
-    expect(output).toContain(ansi.green("✅"));
+    expect(output).toContain(ansi.green(iconByVariant.success));
     expect(output).toContain(ansi.bold("Success"));
     expect(output).toContain("Message");
   });
@@ -37,7 +53,7 @@ describe("Alert", () => {
     );
 
     const output = lastFrame();
-    expect(output).toContain(ansi.red("❌"));
+    expect(output).toContain(ansi.red(iconByVariant.error));
     expect(output).toContain(ansi.bold("Error"));
     expect(output).toContain("Message");
   });
@@ -52,7 +68,7 @@ describe("Alert", () => {
     );
 
     const output = lastFrame();
-    expect(output).toContain(ansi.yellow("⚠️"));
+    expect(output).toContain(ansi.yellow(iconByVariant.warning));
     expect(output).toContain(ansi.bold("Warning"));
     expect(output).toContain("Message");
   });
@@ -67,7 +83,7 @@ describe("Alert", () => {
     );
 
     const output = lastFrame();
-    expect(output).toContain(ansi.blue("ℹ️"));
+    expect(output).toContain(ansi.blue(iconByVariant.info));
     expect(output).toContain(ansi.bold("Info"));
     expect(output).toContain("Message");
   });
@@ -78,7 +94,7 @@ describe("Alert", () => {
     );
 
     const output = lastFrame();
-    expect(output).toContain(ansi.green("✅"));
+    expect(output).toContain(ansi.green(iconByVariant.success));
     expect(output).toContain("Message without title");
   });
 
@@ -104,7 +120,7 @@ describe("Alert", () => {
     );
 
     const output = lastFrame();
-    expect(output).toContain(ansi.yellow("⚠️"));
+    expect(output).toContain(ansi.yellow(iconByVariant.warning));
     expect(output).toContain("very long message");
   });
 

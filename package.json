@@ -41,6 +41,7 @@
   ],
   "typings": "./lib/index.d.ts",
   "dependencies": {
+    "tinky-figures": "^1.0.0",
     "tinky-theme": "^1.0.0"
   },
   "devDependencies": {

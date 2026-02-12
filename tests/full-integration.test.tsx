@@ -8,7 +8,23 @@
 import { describe, it, expect } from "bun:test";
 import { render } from "tinky-test";
 import ansi from "ansis";
+import {
+  asciiFigures,
+  isUnicodeSupported,
+  unicodeFigures,
+} from "tinky-figures";
 import { Alert, alertTheme } from "../src/index.js";
+
+const figures = isUnicodeSupported(process.platform, process.env)
+  ? unicodeFigures
+  : asciiFigures;
+
+const iconByVariant = {
+  info: figures.info,
+  success: figures.tick,
+  error: figures.cross,
+  warning: figures.warning,
+} as const;
 
 describe("Full Integration Tests", () => {
   describe("complete alert rendering", () => {
@@ -20,7 +36,7 @@ describe("Full Integration Tests", () => {
       );
 
       const output = lastFrame();
-      expect(output).toContain(ansi.blue("ℹ️"));
+      expect(output).toContain(ansi.blue(iconByVariant.info));
       expect(output).toContain(ansi.bold("Information"));
       expect(output).toContain(
         "This is a complete alert with title and message",
@@ -129,7 +145,7 @@ describe("Full Integration Tests", () => {
       );
 
       const output = lastFrame();
-      expect(output).toContain(ansi.blue("ℹ️"));
+      expect(output).toContain(ansi.blue(iconByVariant.info));
       expect(output).toContain(ansi.bold("Info"));
       expect(output).toContain("Informational message");
     });
@@ -142,7 +158,7 @@ describe("Full Integration Tests", () => {
       );
 
       const output = lastFrame();
-      expect(output).toContain(ansi.green("✅"));
+      expect(output).toContain(ansi.green(iconByVariant.success));
       expect(output).toContain(ansi.bold("Success"));
       expect(output).toContain("Success message");
     });
@@ -155,7 +171,7 @@ describe("Full Integration Tests", () => {
       );
 
       const output = lastFrame();
-      expect(output).toContain(ansi.red("❌"));
+      expect(output).toContain(ansi.red(iconByVariant.error));
       expect(output).toContain(ansi.bold("Error"));
       expect(output).toContain("Error message");
     });
@@ -168,7 +184,7 @@ describe("Full Integration Tests", () => {
       );
 
       const output = lastFrame();
-      expect(output).toContain(ansi.yellow("⚠️"));
+      expect(output).toContain(ansi.yellow(iconByVariant.warning));
       expect(output).toContain(ansi.bold("Warning"));
       expect(output).toContain("Warning message");
     });

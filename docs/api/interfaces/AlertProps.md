@@ -71,10 +71,10 @@ determines the visual appearance including border color, icon, and semantic mean
 
 Variant options and their meanings:
 
-- `info`: General information or neutral messages (blue border, ℹ️ icon / ℹ fallback)
-- `success`: Successful operations or confirmations (green border, ✅ icon / √ fallback)
-- `error`: Error messages or failure notifications (red border, ❌ icon / × fallback)
-- `warning`: Warning messages or cautionary notes (yellow border, ⚠️ icon / ‼ fallback)
+- `info`: General information or neutral messages (blue border, ℹ icon / i fallback)
+- `success`: Successful operations or confirmations (green border, ✔ icon / √ fallback)
+- `error`: Error messages or failure notifications (red border, ✘ icon / × fallback)
+- `warning`: Warning messages or cautionary notes (yellow border, ⚠ icon / ‼ fallback)
 
 Each variant has associated:
 

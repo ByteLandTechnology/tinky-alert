@@ -10,7 +10,7 @@
 ![license](https://img.shields.io/npm/l/tinky-alert)
 ![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue)
 
-`tinky-alert` provides a fully-featured alert component for terminal applications built with the [tinky](https://github.com/ByteLandTechnology/tinky) framework. It supports four semantic variants with automatic color mapping and icon selection.
+`tinky-alert` provides a fully-featured alert component for terminal applications built with the [tinky](https://github.com/ByteLandTechnology/tinky) framework. It supports four semantic variants with automatic color mapping and icon selection via [tinky-figures](https://github.com/ByteLandTechnology/tinky-figures).
 
 ## Features
 
@@ -155,12 +155,12 @@ The main alert component for displaying messages in terminal UIs.
 
 #### `info`
 
-Informational messages with blue border and ℹ️ icon.
+Informational messages with blue border and ℹ icon.
 
 **Characteristics:**
 
 - Blue border color
-- Information icon (ℹ️)
+- Information icon (ℹ, fallback: i)
 - Used for general information or neutral messages
 
 **Example:**
@@ -173,12 +173,12 @@ Informational messages with blue border and ℹ️ icon.
 
 #### `success`
 
-Success messages with green border and ✅ icon.
+Success messages with green border and ✔ icon.
 
 **Characteristics:**
 
 - Green border color
-- Success/checkmark icon (✅)
+- Success/checkmark icon (✔, fallback: √)
 - Used for successful operations or confirmations
 
 **Example:**
@@ -191,12 +191,12 @@ Success messages with green border and ✅ icon.
 
 #### `error`
 
-Error messages with red border and ❌ icon.
+Error messages with red border and ✘ icon.
 
 **Characteristics:**
 
 - Red border color
-- Error/cross icon (❌)
+- Error/cross icon (✘, fallback: ×)
 - Used for error messages or failure notifications
 
 **Example:**
@@ -209,12 +209,12 @@ Error messages with red border and ❌ icon.
 
 #### `warning`
 
-Warning messages with yellow border and ⚠️ icon.
+Warning messages with yellow border and ⚠ icon.
 
 **Characteristics:**
 
 - Yellow border color
-- Warning icon (⚠️)
+- Warning icon (⚠, fallback: ‼)
 - Used for warning messages or cautionary notes
 
 **Example:**
@@ -233,10 +233,9 @@ Type definition for the Alert theme configuration.
 
 **Properties:**
 
-| Property | Type       | Description                                    |
-| -------- | ---------- | ---------------------------------------------- |
-| `styles` | `Object`   | Style functions for each element               |
-| `config` | `Function` | Configuration function returning theme options |
+| Property | Type     | Description                      |
+| -------- | -------- | -------------------------------- |
+| `styles` | `Object` | Style functions for each element |
 
 **Style Functions:**
 
@@ -247,22 +246,17 @@ Type definition for the Alert theme configuration.
 - `styles.title()` - Styles for the title text
 - `styles.message()` - Styles for the message text
 
-**Configuration:**
-
-- `config(props)` - Returns variant-specific icon
-
 **Example:**
 
 ```tsx
 import { alertTheme } from "tinky-alert";
 
-const { styles, config } = alertTheme;
+const { styles } = alertTheme;
 const containerStyles = styles.container({ variant: "success" });
 // containerStyles === { flexGrow: 1, borderStyle: "round", borderColor: "green", gap: 1, paddingX: 1 }
-
-const iconConfig = config({ variant: "error" });
-// iconConfig === { icon: "❌" }
 ```
+
+Icons are resolved in the `Alert` component through `tinky-figures` (`info`, `tick`, `cross`, `warning`) instead of theme config.
 
 ## Visual Examples
 
@@ -270,7 +264,7 @@ const iconConfig = config({ variant: "error" });
 
 ```
 ┌──────────────────────────┐
-│ ℹ️  Information        │
+│ ℹ  Information         │
 │   This is an info      │
 │   message for users    │
 └──────────────────────────┘
@@ -280,7 +274,7 @@ const iconConfig = config({ variant: "error" });
 
 ```
 ┌──────────────────────────┐
-│ ✅  Success            │
+│ ✔  Success             │
 │   Your operation       │
 │   completed            │
 └──────────────────────────┘
@@ -290,7 +284,7 @@ const iconConfig = config({ variant: "error" });
 
 ```
 ┌──────────────────────────┐
-│ ❌  Error              │
+│ ✘  Error               │
 │   Failed to connect    │
 │   to server            │
 └──────────────────────────┘
@@ -300,7 +294,7 @@ const iconConfig = config({ variant: "error" });
 
 ```
 ┌──────────────────────────┐
-│ ⚠️  Warning            │
+│ ⚠  Warning             │
 │   Your session will    │
 │   expire soon          │
 └──────────────────────────┘
@@ -331,6 +325,7 @@ bun run docs
 
 - [tinky](https://github.com/ByteLandTechnology/tinky) - React for CLIs
 - [tinky-theme](https://github.com/ByteLandTechnology/tinky-theme) - Theme system for tinky
+- [tinky-figures](https://github.com/ByteLandTechnology/tinky-figures) - Unicode/ASCII figures for tinky apps
 - [tinky-test](https://github.com/ByteLandTechnology/tinky-test) - Testing utilities for tinky
 
 ## Acknowledgments

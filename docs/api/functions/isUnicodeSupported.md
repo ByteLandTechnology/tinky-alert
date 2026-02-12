@@ -6,7 +6,7 @@
 
 # Function: isUnicodeSupported()
 
-> **isUnicodeSupported**(`env`): `boolean`
+> **isUnicodeSupported**(`env?`): `boolean`
 
 Utility functions for Unicode support detection.
 
@@ -15,7 +15,7 @@ and provide appropriate fallback characters for unsupported environments.
 
 ## Parameters
 
-### env
+### env?
 
 `Record`\<`string`, `string` \| `undefined`\> = `{}`
 
